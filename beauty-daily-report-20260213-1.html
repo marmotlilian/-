@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美妆个护产品经理日报 - 2026-02-13</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            color: #d63384;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .news-cover {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .news-title-area {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .news-title {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .news-meta {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .category-a {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .category-b {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .score-badge {
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .score-badge.excellent {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .score-badge.good {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+        }
+
+        .score-badge.average {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+        }
+
+        .score-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .score-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .keywords {
+            margin: 15px 0;
+        }
+
+        .keyword-tag {
+            display: inline-block;
+            background: #f8f9fa;
+            color: #d63384;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #f093fb;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            color: #d63384;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 16px;
+            background: #f093fb;
+            margin-right: 8px;
+            border-radius: 2px;
+        }
+
+        .section-content {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .product-info {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 30%);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f5576c;
+            font-weight: bold;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .score-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #f093fb;
+        }
+
+        .score-item-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .score-item-value {
+            color: #d63384;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .score-item-reason {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .url-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #d63384;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .url-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .news-header {
+                flex-direction: column;
+            }
+
+            .score-badge {
+                width: 100%;
+            }
+
+            .news-cover {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💄 美妆个护产品经理日报</h1>
+            <div class="subtitle">女性热搜产品创意挖掘 | 报告日期：2026-02-13</div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number">7</div>
+                    <div class="label">分析热搜总数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">4</div>
+                    <div class="label">A类美妆直接相关</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">3</div>
+                    <div class="label">B类时尚间接相关</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">82.3</div>
+                    <div class="label">平均得分</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- A类美妆产品 - News Card 1 -->
+        <div class="news-card">
+            <img src="https://k.sinaimg.cn/n/fashion/transform/460/w630h630/20260202/58a6-619b475d82ae0581d2d6dac0f00e6a50.jpg" alt="IPSA茵芙莎清润蓝矿物皂" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">IPSA茵芙莎「清润蓝矿物皂」全新升级上市</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-02</div>
+                        <div>
+                            <span class="category-badge category-a">A类·美妆新品</span>
+                        </div>
+                    </div>
+                    <div class="score-badge excellent">
+                        <div class="score-number">92</div>
+                        <div class="score-label">优秀</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#洁面皂</span>
+                    <span class="keyword-tag">#毛孔护理</span>
+                    <span class="keyword-tag">#控油保湿</span>
+                    <span class="keyword-tag">#日系护肤</span>
+                    <span class="keyword-tag">#新品上市</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        IPSA茵芙莎作为日本高端护肤品牌，推出"清润蓝矿物皂"升级版本，聚焦毛孔净澈护理这一核心需求。新配方通过"专研净肌因子"深入毛孔吸附过氧化脂质，实现智感控油。产品融合"深蓝凝润精萃Marine GL"、珍珠母贝蛋白、布列塔尼海盐等海洋成分，在强效清洁的同时避免拔干，实现控油与保湿的平衡。升级后的质地能打出丰盈泡沫，温和净肤。规格100g，售价230元，2026年1月上市。这款产品针对油性肌肤和混合肌肤的毛孔粗大、出油问题，提供了专业的解决方案。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">🌊 智感净肌洁面系统</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            基于肌肤状态智能调节清洁力度的洁面产品线，针对不同季节和肌肤状态提供个性化清洁方案。
+                        </div>
+                        <ul class="feature-list">
+                            <li>智能感应技术：根据肌肤出油程度自动调节清洁强度</li>
+                            <li>海洋矿物复合配方：深层清洁同时补充肌肤矿物质</li>
+                            <li>泡沫质地可视化：通过泡沫颜色变化提示清洁程度</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        25-40岁都市女性，油性或混合性肌肤，关注毛孔问题和肌肤清洁，愿意为专业护肤品付费（客单价200-500元）。痛点：毛孔粗大、出油旺盛、普通洁面产品清洁力不足或过度清洁导致紧绷。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">29分</div>
+                            <div class="score-item-reason">洁面护肤品新品，直接相关度极高</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">26分</div>
+                            <div class="score-item-reason">智感控油技术和海洋成分复配有创新</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">18分</div>
+                            <div class="score-item-reason">毛孔清洁是刚需，市场规模大</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">10分</div>
+                            <div class="score-item-reason">品牌知名度高，新品话题性强</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">9分</div>
+                            <div class="score-item-reason">触及毛孔焦虑和清洁需求痛点</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/b/2026-02-02/1632/doc-inhkmfsf0988078.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+        <!-- A类美妆产品 - News Card 2 -->
+        <div class="news-card">
+            <img src="https://n.sinaimg.cn/fashion/transform/505/w630h675/20260202/a582-5f88e80ffe949cc2d020e372cb9589aa.jpg" alt="PHILIP B情人节礼盒" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">PHILIP B.呈献情人节限定礼盒</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-02</div>
+                        <div>
+                            <span class="category-badge category-a">A类·美妆新品</span>
+                        </div>
+                    </div>
+                    <div class="score-badge excellent">
+                        <div class="score-number">88</div>
+                        <div class="score-label">优秀</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#护发</span>
+                    <span class="keyword-tag">#情人节礼盒</span>
+                    <span class="keyword-tag">#花香调</span>
+                    <span class="keyword-tag">#高端护发</span>
+                    <span class="keyword-tag">#限定款</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        奢华护发品牌PHILIP B.推出2026年情人节限定礼盒，以春日花园为灵感。礼盒融合木兰花、栀子花、茉莉花和橙花等花香调，搭配品牌标志性香氛。套装包含轻盈丰盈洗发水、护发素、免洗护发精华和木质梳子。产品融入迷迭香、绿茶和沙棘等天然植物成分。香调层次丰富：前调为花香，中调为玫瑰和苦橙，尾调为麝香和茉莉。2026年1月起在天猫、京东、小红书和抖音国际旗舰店发售。这一限定系列将护发功效与节日情感价值结合，满足了送礼和自用的双重需求。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">🌸 情感香氛护发系列</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            将护发功效与情感记忆相结合的香氛护发产品，通过不同香调唤起特定情感和记忆。
+                        </div>
+                        <ul class="feature-list">
+                            <li>情感香调库：为不同情绪和场景定制专属香氛配方</li>
+                            <li>记忆锁香技术：让香味持久留香，成为个人标志</li>
+                            <li>节日限定系列：结合节日主题推出情感化礼盒包装</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        25-45岁中高端女性消费者，注重生活品质和仪式感，愿意为高端护发和香氛产品付费（客单价500-1000元）。痛点：普通护发产品缺乏情感价值、送礼缺乏心意、希望通过香氛表达个性。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">28分</div>
+                            <div class="score-item-reason">高端护发产品，直接相关</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">24分</div>
+                            <div class="score-item-reason">情感化香氛护发概念有新意</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">17分</div>
+                            <div class="score-item-reason">高端护发和节日送礼市场稳定</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">10分</div>
+                            <div class="score-item-reason">情人节限定话题性强，易传播</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">9分</div>
+                            <div class="score-item-reason">触及情感表达和仪式感需求</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/b/2026-02-02/1638/doc-inhkmmxz4130859.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+        <!-- A类美妆产品 - News Card 3 -->
+        <div class="news-card">
+            <img src="http://n.sinaimg.cn/default/crawl/573/w550h823/20260202/28bd-905ab31033eec2e89fb4e2deeff7f256.jpg" alt="新年美甲" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">想要一个"新年"味满满的美甲，快来这里抄作业！</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-02</div>
+                        <div>
+                            <span class="category-badge category-a">A类·美妆直接相关</span>
+                        </div>
+                    </div>
+                    <div class="score-badge excellent">
+                        <div class="score-number">85</div>
+                        <div class="score-label">优秀</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#美甲</span>
+                    <span class="keyword-tag">#新年主题</span>
+                    <span class="keyword-tag">#可拆卸美甲</span>
+                    <span class="keyword-tag">#明星同款</span>
+                    <span class="keyword-tag">#节日仪式感</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        2026年春节临近，新年主题美甲成为女性美容消费热点。文章展示了Hailey、Jennie、Lisa等明星的美甲灵感，涵盖裸色奶油、大胆红色和金属质感等多种风格。设计元素包括波点、斑马纹和星星图案。特别值得关注的是可拆卸美甲技术创新——包括磁吸式、铰链式和榫卯式设计，让佩戴者可以在长款装饰美甲和实用短甲之间自由切换，解决了打麻将等日常活动的不便。文章将美甲定位为"美丽改造三件套"之一，强调其在迎接新年中的仪式感价值。这一趋势反映了女性对节日仪式感和实用性兼顾的需求。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">💅 智能可换美甲系统</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            结合可拆卸技术和节日主题设计的智能美甲产品，让用户根据场合快速更换美甲风格。
+                        </div>
+                        <ul class="feature-list">
+                            <li>磁吸快换技术：3秒更换美甲，无需卸甲液</li>
+                            <li>节日主题库：按节日和场合提供设计方案</li>
+                            <li>AR试甲功能：手机扫描实时预览上手效果</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        18-35岁都市女性，注重外表和仪式感，有定期做美甲习惯但希望更灵活（客单价100-300元）。痛点：传统美甲不便日常活动、更换成本高、节日主题设计灵感不足。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">28分</div>
+                            <div class="score-item-reason">美甲产品和服务，直接相关</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">27分</div>
+                            <div class="score-item-reason">可拆卸美甲技术创新度高</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">16分</div>
+                            <div class="score-item-reason">美甲市场大，实用性需求明确</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">7分</div>
+                            <div class="score-item-reason">节日话题性强，明星效应加持</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">7分</div>
+                            <div class="score-item-reason">触及仪式感和便利性需求</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/s/2026-02-02/1731/doc-inhkmmxz4164581.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+        <!-- A类美妆产品 - News Card 4 -->
+        <div class="news-card">
+            <img src="http://n.sinaimg.cn/default/crawl/483/w550h733/20260212/3f08-fb82a239d18ba7028ca3edfbe382f9e2.jpg" alt="照片修图" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">一顿p图操作，让那些"压箱底"的照片都能重见天日了</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-12</div>
+                        <div>
+                            <span class="category-badge category-a">A类·美妆直接相关</span>
+                        </div>
+                    </div>
+                    <div class="score-badge good">
+                        <div class="score-number">82</div>
+                        <div class="score-label">良好</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#照片美颜</span>
+                    <span class="keyword-tag">#修图技巧</span>
+                    <span class="keyword-tag">#春节照片</span>
+                    <span class="keyword-tag">#美妆效果</span>
+                    <span class="keyword-tag">#AI修图</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        春节临近，这篇时尚指南教授照片编辑技巧。内容涵盖纠正户外过曝照片、改善室内光线问题，以及添加睫毛和鼻影等自然细节。文章提供了流行修图应用的具体调整数值，并通过社交媒体创作者的真实案例展示前后对比效果。这一趋势反映了女性对照片美化的强烈需求，特别是在节日期间需要分享精美照片的场景。修图技术已经从简单的滤镜发展到精细的美妆效果模拟，包括睫毛、眼影、腮红、鼻影等细节调整，让普通照片也能呈现专业美妆效果。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">📸 虚拟美妆试色相机</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            将照片修图与美妆产品试色结合，让用户在修图时直接体验真实美妆产品效果。
+                        </div>
+                        <ul class="feature-list">
+                            <li>品牌美妆库：收录真实美妆产品的色号和质地</li>
+                            <li>智能推荐：根据肤色和场景推荐适合的美妆产品</li>
+                            <li>一键购买：修图时喜欢的美妆效果可直接跳转购买</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        18-35岁爱美女性，活跃于社交媒体，希望照片呈现最佳状态（客单价0-50元工具费+美妆产品费）。痛点：不知道什么美妆产品适合自己、修图效果与实际美妆效果脱节、缺乏专业修图技能。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">25分</div>
+                            <div class="score-item-reason">与美妆效果展示直接相关</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">24分</div>
+                            <div class="score-item-reason">修图与美妆试色结合有创新</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">17分</div>
+                            <div class="score-item-reason">照片美化和美妆试色需求大</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">8分</div>
+                            <div class="score-item-reason">社交媒体话题性强</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">8分</div>
+                            <div class="score-item-reason">触及变美和社交展示需求</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1652/doc-inhmpyyi3945076.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+        <!-- B类时尚话题 - News Card 5 -->
+        <div class="news-card">
+            <img src="http://n.sinaimg.cn/default/crawl/703/w550h953/20260212/3909-32d2d99209522dce0c75395aa102ec97.png" alt="冬季色彩穿搭" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">除了黑白灰，还能给冬天什么颜色"看看"？</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-12</div>
+                        <div>
+                            <span class="category-badge category-b">B类·时尚间接相关</span>
+                        </div>
+                    </div>
+                    <div class="score-badge good">
+                        <div class="score-number">78</div>
+                        <div class="score-label">良好</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#色彩搭配</span>
+                    <span class="keyword-tag">#冬季穿搭</span>
+                    <span class="keyword-tag">#大地色系</span>
+                    <span class="keyword-tag">#情绪色彩</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        冬季穿搭已进行2/3，许多人厌倦了黑白灰的日常。文章建议通过棕色系、橄榄绿、浆果色等低饱和度色彩，或奶油色系浅调来打破沉闷。同色系搭配、大地色混搭、高饱和亮色点缀，甚至春节正红色单品，都能为冬日穿搭增添活力与个性。这一趋势反映了女性对色彩表达和情绪调节的需求，色彩不仅是视觉元素，更是情感和个性的载体。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">🎨 色彩情绪美妆系列</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            基于色彩心理学的美妆产品线，通过不同色系的彩妆帮助女性表达情绪和个性。
+                        </div>
+                        <ul class="feature-list">
+                            <li>情绪色彩库：为不同心情和场景定制色彩方案</li>
+                            <li>穿搭联动：美妆色彩与服装色彩智能匹配</li>
+                            <li>季节限定：根据季节推出应景色系产品</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        22-38岁时尚女性，追求个性表达，希望通过色彩调节情绪（客单价150-400元）。痛点：不知道什么颜色适合自己、美妆与穿搭色彩不协调、缺乏色彩搭配知识。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">20分</div>
+                            <div class="score-item-reason">色彩理论可应用于彩妆产品</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">23分</div>
+                            <div class="score-item-reason">色彩心理学与美妆结合有新意</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">17分</div>
+                            <div class="score-item-reason">色彩表达需求明确</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">10分</div>
+                            <div class="score-item-reason">色彩话题传播性强</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">8分</div>
+                            <div class="score-item-reason">触及情绪表达和个性需求</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1655/doc-inhmpyyf6844313.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+        <!-- B类时尚话题 - News Card 6 -->
+        <div class="news-card">
+            <img src="http://n.sinaimg.cn/default/crawl/703/w550h953/20260212/a65b-865e499b4a94c204e9643c9d016c52ac.png" alt="皮衣单品" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">一件这个类型的时尚单品，可以抵得上十件？</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-12</div>
+                        <div>
+                            <span class="category-badge category-b">B类·时尚间接相关</span>
+                        </div>
+                    </div>
+                    <div class="score-badge good">
+                        <div class="score-number">76</div>
+                        <div class="score-label">良好</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#皮衣</span>
+                    <span class="keyword-tag">#百搭单品</span>
+                    <span class="keyword-tag">#极简衣橱</span>
+                    <span class="keyword-tag">#投资型单品</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        文章探讨皮衣作为2026年百搭衣橱必备单品。强调"皮衣作为具有中性气质的单品，不仅仅可以是廓形的、Power的，也可以是裹身的、性感的"。关键趋势包括光泽质感和修身剪裁，在Prada、Gucci和Hermès等品牌秀场上频繁出现。文章提供实用搭配组合——将皮衣与薄纱裙、白色牛仔裤和复古单品搭配，展示这一投资型单品如何在不同季节创造多种精致造型。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">✨ 质感肌肤护理系列</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            受皮革光泽质感启发的护肤产品，打造如皮革般光滑细腻的肌肤质感。
+                        </div>
+                        <ul class="feature-list">
+                            <li>光泽提亮：提升肌肤自然光泽感</li>
+                            <li>质感优化：改善肌肤纹理，打造细腻触感</li>
+                            <li>持久定妆：保持妆容光泽不脱妆</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        25-40岁职场女性，追求精致妆容和高级感（客单价200-600元）。痛点：肌肤暗沉无光泽、妆容不够高级、希望呈现健康光泽感。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">18分</div>
+                            <div class="score-item-reason">质感概念可延伸至护肤美妆</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">22分</div>
+                            <div class="score-item-reason">质感护肤概念有一定新意</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">17分</div>
+                            <div class="score-item-reason">肌肤光泽需求明确</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">10分</div>
+                            <div class="score-item-reason">高级感话题易传播</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">9分</div>
+                            <div class="score-item-reason">触及精致和高级感追求</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1658/doc-inhmpyyi3947817.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+        <!-- B类时尚话题 - News Card 7 -->
+        <div class="news-card">
+            <img src="http://n.sinaimg.cn/default/crawl/703/w550h953/20260212/e626-1e8ddd2ac99cb826da76e21c654da125.png" alt="深冬毛衣" class="news-cover">
+            <div class="news-content">
+                <div class="news-header">
+                    <div class="news-title-area">
+                        <h2 class="news-title">深冬来临，你挑好衣橱里那件最柔软的毛衣了吗？</h2>
+                        <div class="news-meta">来源：新浪女性 | 发布日期：2026-02-12</div>
+                        <div>
+                            <span class="category-badge category-b">B类·时尚间接相关</span>
+                        </div>
+                    </div>
+                    <div class="score-badge good">
+                        <div class="score-number">75</div>
+                        <div class="score-label">良好</div>
+                    </div>
+                </div>
+
+                <div class="keywords">
+                    <span class="keyword-tag">#柔软触感</span>
+                    <span class="keyword-tag">#冬季保暖</span>
+                    <span class="keyword-tag">#羊绒材质</span>
+                    <span class="keyword-tag">#舒适体验</span>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">事件背景</div>
+                    <div class="section-content">
+                        深冬季节，选择合适的毛衣成为关键。文章从廓形、风格和材质三个维度探讨毛衣选购。廓形方面，"极致贴身的第二层肌肤"与"松弛轮廓"并存；风格上分为智性、灵动和慵懒三类；材质涵盖羊绒、马海毛、棉质及合成纤维，各具特点。羊绒提供奢华感，棉质亲肤透气，合成纤维则兼顾耐穿与易护理。这一话题强调了触感和舒适度在冬季服装选择中的重要性。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">产品创意</div>
+                    <div class="product-info">
+                        <div class="product-name">🧴 柔肤触感身体护理</div>
+                        <div class="section-content" style="margin-bottom: 15px;">
+                            受柔软毛衣触感启发的身体护理产品，打造如羊绒般柔滑的肌肤触感。
+                        </div>
+                        <ul class="feature-list">
+                            <li>丝滑质地：提升肌肤柔软度和光滑度</li>
+                            <li>深层滋养：改善干燥粗糙问题</li>
+                            <li>持久保湿：长效锁水，保持柔嫩触感</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">目标用户</div>
+                    <div class="section-content">
+                        25-45岁注重生活品质的女性，对肌肤触感有较高要求（客单价100-300元）。痛点：冬季肌肤干燥粗糙、身体护理产品效果不持久、希望肌肤柔软细腻。
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">评分详情</div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-item-title">美妆个护关联性 (30分)</div>
+                            <div class="score-item-value">19分</div>
+                            <div class="score-item-reason">触感概念可应用于身体护理</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">创新性 (30分)</div>
+                            <div class="score-item-value">21分</div>
+                            <div class="score-item-reason">触感护理概念有一定新意</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">市场需求 (20分)</div>
+                            <div class="score-item-value">17分</div>
+                            <div class="score-item-reason">冬季身体护理需求稳定</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">卖点宣发 (10分)</div>
+                            <div class="score-item-value">10分</div>
+                            <div class="score-item-reason">舒适感话题易引发共鸣</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-item-title">情感共鸣 (10分)</div>
+                            <div class="score-item-value">8分</div>
+                            <div class="score-item-reason">触及自我关怀和舒适需求</div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1706/doc-inhmpyyc9725000.shtml" class="url-link" target="_blank">查看原文 →</a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
