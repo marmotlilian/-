@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026-02-16 新闻分析 - 新浪女性热搜</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .date {
+            color: #666;
+            font-size: 18px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .news-card {
+            border: 2px solid #dee2e6;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .news-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .news-card.category-A {
+            background: #ffe6f0;
+            border-color: #ff69b4;
+        }
+        .news-card.category-B {
+            background: #fff4e6;
+            border-color: #ff8c42;
+        }
+        .news-card.category-C {
+            background: #f8f9fa;
+            border-color: #6c757d;
+        }
+        .news-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        .category-badge.A {
+            background: #ff69b4;
+            color: white;
+        }
+        .category-badge.B {
+            background: #ff8c42;
+            color: white;
+        }
+        .category-badge.C {
+            background: #6c757d;
+            color: white;
+        }
+        .relevance-score {
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            white-space: nowrap;
+        }
+        .news-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .news-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .news-meta a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .news-meta a:hover {
+            text-decoration: underline;
+        }
+        .keywords {
+            margin-bottom: 16px;
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .highlight {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            color: #555;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 24px; }
+            .stats-bar { flex-direction: column; gap: 16px; }
+            .news-header { flex-direction: column; }
+            .relevance-score { margin-top: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="sina-product-analysis.html" class="back-link">← 返回主页</a>
+
+        <div class="header">
+            <h1>新浪女性热搜分析</h1>
+            <div class="date">2026年2月16日</div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">10</div>
+                <div class="stat-label">总新闻数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">2</div>
+                <div class="stat-label">A类（核心）</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">6</div>
+                <div class="stat-label">B类（延伸）</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">2</div>
+                <div class="stat-label">C类（周边）</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">71.5</div>
+                <div class="stat-label">平均相关度</div>
+            </div>
+        </div>
+
+        <!-- 新闻1 -->
+        <div class="news-card category-A">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge A">A类</span>
+                </div>
+                <div class="relevance-score">95分</div>
+            </div>
+            <div class="news-title">IPSA茵芙莎「清润蓝矿物皂」全新升级上市</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-02 17:00 |
+                <a href="https://fashion.sina.com.cn/b/2026-02-02/1632/doc-inhkmfsf0988078.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">茵芙莎</span>
+                <span class="keyword-tag">洁面</span>
+                <span class="keyword-tag">矿物皂</span>
+                <span class="keyword-tag">控油</span>
+                <span class="keyword-tag">保湿</span>
+            </div>
+            <div class="highlight">
+                IPSA升级清润蓝矿物皂，新增专研净肌因子深入毛孔吸附过氧化脂质，添加深蓝凝润精萃Marine GL实现控油不拔干，改进配方打出舒芙蕾般Q弹泡沫。针对油性及混油肌肤，100g售价230元。
+            </div>
+        </div>
+
+        <!-- 新闻2 -->
+        <div class="news-card category-A">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge A">A类</span>
+                </div>
+                <div class="relevance-score">88分</div>
+            </div>
+            <div class="news-title">PHILIP B.呈献情人节限定礼盒</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-02 17:00 |
+                <a href="https://fashion.sina.com.cn/b/2026-02-02/1638/doc-inhkmmxz4130859.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">PHILIP B</span>
+                <span class="keyword-tag">护发</span>
+                <span class="keyword-tag">礼盒</span>
+                <span class="keyword-tag">植萃</span>
+                <span class="keyword-tag">情人节</span>
+            </div>
+            <div class="highlight">
+                PHILIP B情人节限定礼盒含轻盈蓬松洗发水（融合迷迭香、绿茶、芦荟微米萃取）、护发素、免洗精华液及手工宽齿梳。以春日花园为灵感，香调融合木兰、橙花、栀子、玫瑰与苦橙，呈现中性精致的奢华护理体验。
+            </div>
+        </div>
+
+        <!-- 新闻3 -->
+        <div class="news-card category-B">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge B">B类</span>
+                </div>
+                <div class="relevance-score">82分</div>
+            </div>
+            <div class="news-title">想要一个"新年"味满满的美甲，快来这里抄作业！</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-02 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-02/1731/doc-inhkmmxz4164581.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">美甲</span>
+                <span class="keyword-tag">可拆卸</span>
+                <span class="keyword-tag">新年</span>
+                <span class="keyword-tag">磁吸</span>
+                <span class="keyword-tag">猫眼</span>
+            </div>
+            <div class="highlight">
+                2026新年美甲流行红色波点、斑马纹、星星图案、猫眼磁石设计。创新可拆卸美甲采用磁吸、铰链或榫卯结构，让佩戴者在长款华丽美甲和短款实用美甲间自由切换，完美解决美观与实用矛盾。
+            </div>
+        </div>
+
+        <!-- 新闻4 -->
+        <div class="news-card category-C">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge C">C类</span>
+                </div>
+                <div class="relevance-score">75分</div>
+            </div>
+            <div class="news-title">一顿p图操作，让那些"压箱底"的照片都能重见天日了</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-12 17:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1652/doc-inhmpyyi3945076.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">修图</span>
+                <span class="keyword-tag">AI</span>
+                <span class="keyword-tag">照片</span>
+                <span class="keyword-tag">调色</span>
+                <span class="keyword-tag">春节</span>
+            </div>
+            <div class="highlight">
+                针对春节修图需求，介绍系统化修图方法：先压高光再提阴影最后调肤色。通过分区调整、HSL调整、曲线工具等功能，解决过曝、欠曝、模糊、肤色不佳等问题，让废片重见天日。强调细节决定成败。
+            </div>
+        </div>
+
+        <!-- 新闻5 -->
+        <div class="news-card category-B">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge B">B类</span>
+                </div>
+                <div class="relevance-score">72分</div>
+            </div>
+            <div class="news-title">一件这个类型的时尚单品，可以抵得上十件？</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-12 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1658/doc-inhmpyyi3947817.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">皮衣</span>
+                <span class="keyword-tag">多功能</span>
+                <span class="keyword-tag">投资单品</span>
+                <span class="keyword-tag">跨季节</span>
+                <span class="keyword-tag">时装周</span>
+            </div>
+            <div class="highlight">
+                皮衣在2026年成为跨越季节与场合的投资单品。可搭配绸缎衬衫展现女性气质，配轻薄纱裙打造春季造型，搭学院风半裙呈现青春感。从硬朗到女性化、从复古到现代，一衣多穿符合可持续时尚趋势。
+            </div>
+        </div>
+
+        <!-- 新闻6 -->
+        <div class="news-card category-B">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge B">B类</span>
+                </div>
+                <div class="relevance-score">68分</div>
+            </div>
+            <div class="news-title">薄底运动鞋不再称霸天下，乐福鞋再次翻红？</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-02 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-02/1720/doc-inhkmmye7994667.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">乐福鞋</span>
+                <span class="keyword-tag">松弛感</span>
+                <span class="keyword-tag">一脚蹬</span>
+                <span class="keyword-tag">Saint Laurent</span>
+                <span class="keyword-tag">实用</span>
+            </div>
+            <div class="highlight">
+                Lyst 2025年Q3数据显示Saint Laurent和The Row乐福鞋分列第2、4名。作为一脚蹬，兼具穿脱方便、轻便舒适特点，传达松弛感美学。既中性又优雅，平衡正式与休闲，冬季薄底为厚重棉服注入轻盈气息。
+            </div>
+        </div>
+
+        <!-- 新闻7 -->
+        <div class="news-card category-B">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge B">B类</span>
+                </div>
+                <div class="relevance-score">65分</div>
+            </div>
+            <div class="news-title">深冬来临，你挑好衣橱里那件最柔软的毛衣了吗？</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-12 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1706/doc-inhmpyyc9725000.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">毛衣</span>
+                <span class="keyword-tag">柔软</span>
+                <span class="keyword-tag">羊绒</span>
+                <span class="keyword-tag">舒适</span>
+                <span class="keyword-tag">廓形</span>
+            </div>
+            <div class="highlight">
+                强调毛衣柔软性与舒适度，介绍贴身款（弹力面料紧贴身形）和宽松款（宽肩、茧型、披挂式）两种廓形。推荐羊绒、马海毛、丝绒等顶级材质，满足都市女性对不费力时髦感和拒绝束缚的需求。
+            </div>
+        </div>
+
+        <!-- 新闻8 -->
+        <div class="news-card category-B">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge B">B类</span>
+                </div>
+                <div class="relevance-score">62分</div>
+            </div>
+            <div class="news-title">除了黑白灰，还能给冬天什么颜色"看看"？</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-12 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-12/1655/doc-inhmpyyf6844313.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">配色</span>
+                <span class="keyword-tag">冬季穿搭</span>
+                <span class="keyword-tag">浆果色</span>
+                <span class="keyword-tag">橄榄绿</span>
+                <span class="keyword-tag">情绪</span>
+            </div>
+            <div class="highlight">
+                鼓励打破冬季黑白灰单调，推荐棕色系、橄榄绿、浆果色调等柔和色调，奶油色、米色等温柔色系，高饱和亮红色适合春节。同色系叠穿和小面积配色点缀成主流，色彩选择既是时尚表达也是心理调节手段。
+            </div>
+        </div>
+
+        <!-- 新闻9 -->
+        <div class="news-card category-B">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge B">B类</span>
+                </div>
+                <div class="relevance-score">58分</div>
+            </div>
+            <div class="news-title">这一波时尚潮流，怎么又"老"又"新"的？</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-02 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-02/1724/doc-inhkmmyc0896476.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">复古</span>
+                <span class="keyword-tag">New Vintage</span>
+                <span class="keyword-tag">90年代</span>
+                <span class="keyword-tag">老钱风</span>
+                <span class="keyword-tag">二手</span>
+            </div>
+            <div class="highlight">
+                New Vintage 3.0潮流指全新但做旧的时尚，或用新方式混搭旧单品。融合90年代美学、Blokecore、老钱风等元素，Z世代通过二手商店或父母衣橱淘旧物，追求独一无二且具收藏价值的物品。
+            </div>
+        </div>
+
+        <!-- 新闻10 -->
+        <div class="news-card category-C">
+            <div class="news-header">
+                <div>
+                    <span class="category-badge C">C类</span>
+                </div>
+                <div class="relevance-score">45分</div>
+            </div>
+            <div class="news-title">年末的舞台上，哪位女solo又贡献出名场面了？</div>
+            <div class="news-meta">
+                来源：新浪女性 | 发布时间：2026-02-02 18:00 |
+                <a href="https://fashion.sina.com.cn/s/2026-02-02/1738/doc-inhkmmye8008211.shtml" target="_blank">查看原文</a>
+            </div>
+            <div class="keywords">
+                <span class="keyword-tag">舞台妆</span>
+                <span class="keyword-tag">Jennie</span>
+                <span class="keyword-tag">单依纯</span>
+                <span class="keyword-tag">演唱会</span>
+                <span class="keyword-tag">造型</span>
+            </div>
+            <div class="highlight">
+                年末舞台Jennie凭借顶级表现力和精心编排展现Kpop女王回归，妮式穿搭极具辨识度。单依纯三场跨年全开麦，空灵嗓音配合白裙、流苏、镂空套装。舞台妆造围绕氛围和情绪服务，不再追求精致上镜。
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

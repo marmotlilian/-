@@ -1,0 +1,130 @@
+{
+  "lastUpdate": "2026-02-16",
+  "dates": [
+    {
+      "date": "2026-02-16",
+      "stats": {
+        "A": 2,
+        "B": 6,
+        "C": 2,
+        "avgRelevance": 71.5,
+        "topNews": {
+          "title": "IPSA茵芙莎「清润蓝矿物皂」全新升级上市",
+          "relevance": 95
+        }
+      },
+      "news": [
+        {
+          "id": "d41ab2d46025d2ca07d346cc93496ab2",
+          "title": "IPSA茵芙莎「清润蓝矿物皂」全新升级上市",
+          "category": "A",
+          "relevance": 95,
+          "source": "新浪女性",
+          "publishTime": "2026-02-02 17:00",
+          "url": "https://fashion.sina.com.cn/b/2026-02-02/1632/doc-inhkmfsf0988078.shtml",
+          "keywords": ["茵芙莎", "洁面", "矿物皂", "控油", "保湿"],
+          "highlight": "IPSA升级清润蓝矿物皂，新增专研净肌因子深入毛孔吸附过氧化脂质，添加深蓝凝润精萃Marine GL实现控油不拔干，改进配方打出舒芙蕾般Q弹泡沫。针对油性及混油肌肤，100g售价230元。"
+        },
+        {
+          "id": "390096f45dfd526b08805aa66321e495",
+          "title": "PHILIP B.呈献情人节限定礼盒",
+          "category": "A",
+          "relevance": 88,
+          "source": "新浪女性",
+          "publishTime": "2026-02-02 17:00",
+          "url": "https://fashion.sina.com.cn/b/2026-02-02/1638/doc-inhkmmxz4130859.shtml",
+          "keywords": ["PHILIP B", "护发", "礼盒", "植萃", "情人节"],
+          "highlight": "PHILIP B情人节限定礼盒含轻盈蓬松洗发水（融合迷迭香、绿茶、芦荟微米萃取）、护发素、免洗精华液及手工宽齿梳。以春日花园为灵感，香调融合木兰、橙花、栀子、玫瑰与苦橙，呈现中性精致的奢华护理体验。"
+        },
+        {
+          "id": "23ea940cf47b5c0ccb50f50004582bc9",
+          "title": "想要一个"新年"味满满的美甲，快来这里抄作业！",
+          "category": "B",
+          "relevance": 82,
+          "source": "新浪女性",
+          "publishTime": "2026-02-02 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-02/1731/doc-inhkmmxz4164581.shtml",
+          "keywords": ["美甲", "可拆卸", "新年", "磁吸", "猫眼"],
+          "highlight": "2026新年美甲流行红色波点、斑马纹、星星图案、猫眼磁石设计。创新可拆卸美甲采用磁吸、铰链或榫卯结构，让佩戴者在长款华丽美甲和短款实用美甲间自由切换，完美解决美观与实用矛盾。"
+        },
+        {
+          "id": "7b320af16f21d9a5fd38fc47b37439f7",
+          "title": "一顿p图操作，让那些"压箱底"的照片都能重见天日了",
+          "category": "C",
+          "relevance": 75,
+          "source": "新浪女性",
+          "publishTime": "2026-02-12 17:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-12/1652/doc-inhmpyyi3945076.shtml",
+          "keywords": ["修图", "AI", "照片", "调色", "春节"],
+          "highlight": "针对春节修图需求，介绍系统化修图方法：先压高光再提阴影最后调肤色。通过分区调整、HSL调整、曲线工具等功能，解决过曝、欠曝、模糊、肤色不佳等问题，让废片重见天日。强调细节决定成败。"
+        },
+        {
+          "id": "18e6d3a6057c48384c2f92eaa27c3e46",
+          "title": "一件这个类型的时尚单品，可以抵得上十件？",
+          "category": "B",
+          "relevance": 72,
+          "source": "新浪女性",
+          "publishTime": "2026-02-12 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-12/1658/doc-inhmpyyi3947817.shtml",
+          "keywords": ["皮衣", "多功能", "投资单品", "跨季节", "时装周"],
+          "highlight": "皮衣在2026年成为跨越季节与场合的投资单品。可搭配绸缎衬衫展现女性气质，配轻薄纱裙打造春季造型，搭学院风半裙呈现青春感。从硬朗到女性化、从复古到现代，一衣多穿符合可持续时尚趋势。"
+        },
+        {
+          "id": "bd8848c9a198548566255875bed0b370",
+          "title": "薄底运动鞋不再称霸天下，乐福鞋再次翻红？",
+          "category": "B",
+          "relevance": 68,
+          "source": "新浪女性",
+          "publishTime": "2026-02-02 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-02/1720/doc-inhkmmye7994667.shtml",
+          "keywords": ["乐福鞋", "松弛感", "一脚蹬", "Saint Laurent", "实用"],
+          "highlight": "Lyst 2025年Q3数据显示Saint Laurent和The Row乐福鞋分列第2、4名。作为一脚蹬，兼具穿脱方便、轻便舒适特点，传达松弛感美学。既中性又优雅，平衡正式与休闲，冬季薄底为厚重棉服注入轻盈气息。"
+        },
+        {
+          "id": "7e06349a72442bb69210c4c1644ed5e6",
+          "title": "深冬来临，你挑好衣橱里那件最柔软的毛衣了吗？",
+          "category": "B",
+          "relevance": 65,
+          "source": "新浪女性",
+          "publishTime": "2026-02-12 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-12/1706/doc-inhmpyyc9725000.shtml",
+          "keywords": ["毛衣", "柔软", "羊绒", "舒适", "廓形"],
+          "highlight": "强调毛衣柔软性与舒适度，介绍贴身款（弹力面料紧贴身形）和宽松款（宽肩、茧型、披挂式）两种廓形。推荐羊绒、马海毛、丝绒等顶级材质，满足都市女性对不费力时髦感和拒绝束缚的需求。"
+        },
+        {
+          "id": "96830891a3f19652fba0781ce7ad4608",
+          "title": "除了黑白灰，还能给冬天什么颜色"看看"？",
+          "category": "B",
+          "relevance": 62,
+          "source": "新浪女性",
+          "publishTime": "2026-02-12 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-12/1655/doc-inhmpyyf6844313.shtml",
+          "keywords": ["配色", "冬季穿搭", "浆果色", "橄榄绿", "情绪"],
+          "highlight": "鼓励打破冬季黑白灰单调，推荐棕色系、橄榄绿、浆果色调等柔和色调，奶油色、米色等温柔色系，高饱和亮红色适合春节。同色系叠穿和小面积配色点缀成主流，色彩选择既是时尚表达也是心理调节手段。"
+        },
+        {
+          "id": "925398150d7469cc8f28c5d5b8f1f675",
+          "title": "这一波时尚潮流，怎么又"老"又"新"的？",
+          "category": "B",
+          "relevance": 58,
+          "source": "新浪女性",
+          "publishTime": "2026-02-02 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-02/1724/doc-inhkmmyc0896476.shtml",
+          "keywords": ["复古", "New Vintage", "90年代", "老钱风", "二手"],
+          "highlight": "New Vintage 3.0潮流指全新但做旧的时尚，或用新方式混搭旧单品。融合90年代美学、Blokecore、老钱风等元素，Z世代通过二手商店或父母衣橱淘旧物，追求独一无二且具收藏价值的物品。"
+        },
+        {
+          "id": "89972588afd0603cfe32a6245ca0d547",
+          "title": "年末的舞台上，哪位女solo又贡献出名场面了？",
+          "category": "C",
+          "relevance": 45,
+          "source": "新浪女性",
+          "publishTime": "2026-02-02 18:00",
+          "url": "https://fashion.sina.com.cn/s/2026-02-02/1738/doc-inhkmmye8008211.shtml",
+          "keywords": ["舞台妆", "Jennie", "单依纯", "演唱会", "造型"],
+          "highlight": "年末舞台Jennie凭借顶级表现力和精心编排展现Kpop女王回归，妮式穿搭极具辨识度。单依纯三场跨年全开麦，空灵嗓音配合白裙、流苏、镂空套装。舞台妆造围绕氛围和情绪服务，不再追求精致上镜。"
+        }
+      ]
+    }
+  ]
+}

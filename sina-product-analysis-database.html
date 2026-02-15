@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新浪女性热搜数据库 - 美妆个护产品分析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .controls {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            flex: 1;
+            min-width: 300px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .filter-group {
+            display: flex;
+            gap: 8px;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            background: #f8f9fa;
+        }
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .filter-btn.category-A.active {
+            background: #ff69b4;
+            border-color: #ff69b4;
+        }
+        .filter-btn.category-B.active {
+            background: #ff8c42;
+            border-color: #ff8c42;
+        }
+        .filter-btn.category-C.active {
+            background: #6c757d;
+            border-color: #6c757d;
+        }
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .stat-card {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+        }
+        th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+            cursor: pointer;
+            user-select: none;
+        }
+        th:hover {
+            background: #e9ecef;
+        }
+        th.sortable::after {
+            content: " ↕";
+            color: #999;
+        }
+        th.sort-asc::after {
+            content: " ↑";
+            color: #667eea;
+        }
+        th.sort-desc::after {
+            content: " ↓";
+            color: #667eea;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .category-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .category-badge.A { background: #ff69b4; }
+        .category-badge.B { background: #ff8c42; }
+        .category-badge.C { background: #6c757d; }
+        .relevance-cell {
+            font-weight: bold;
+            color: #667eea;
+        }
+        .keyword-tag {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-right: 4px;
+            margin-bottom: 4px;
+        }
+        .highlight-text {
+            color: #555;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+        .link-btn {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .link-btn:hover {
+            text-decoration: underline;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            .search-box {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>新浪女性热搜数据库</h1>
+        <div class="subtitle">美妆个护产品分析 | 最后更新：2026-02-16</div>
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <div class="stat-value" id="totalCount">10</div>
+                <div class="stat-label">总新闻数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #ff69b4;" id="categoryA">2</div>
+                <div class="stat-label">A类（核心）</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #ff8c42;" id="categoryB">6</div>
+                <div class="stat-label">B类（延伸）</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #6c757d;" id="categoryC">2</div>
+                <div class="stat-label">C类（周边）</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="avgRelevance">71.5</div>
+                <div class="stat-label">平均相关度</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索标题、关键词、亮点...">
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active" data-category="all">全部</button>
+                <button class="filter-btn category-A" data-category="A">A类</button>
+                <button class="filter-btn category-B" data-category="B">B类</button>
+                <button class="filter-btn category-C" data-category="C">C类</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-sort="date">日期</th>
+                        <th class="sortable" data-sort="category">分类</th>
+                        <th class="sortable" data-sort="relevance">相关度</th>
+                        <th>标题</th>
+                        <th>关键词</th>
+                        <th>亮点</th>
+                        <th>原文</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- 数据将通过JavaScript动态生成 -->
+                </tbody>
+            </table>
+            <div id="noResults" class="no-results" style="display: none;">
+                没有找到匹配的结果
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 数据
+        const newsData = [
+            {
+                date: "2026-02-16",
+                category: "A",
+                relevance: 95,
+                title: "IPSA茵芙莎「清润蓝矿物皂」全新升级上市",
+                keywords: ["茵芙莎", "洁面", "矿物皂", "控油", "保湿"],
+                highlight: "IPSA升级清润蓝矿物皂，新增专研净肌因子深入毛孔吸附过氧化脂质，添加深蓝凝润精萃Marine GL实现控油不拔干，改进配方打出舒芙蕾般Q弹泡沫。针对油性及混油肌肤，100g售价230元。",
+                url: "https://fashion.sina.com.cn/b/2026-02-02/1632/doc-inhkmfsf0988078.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "A",
+                relevance: 88,
+                title: "PHILIP B.呈献情人节限定礼盒",
+                keywords: ["PHILIP B", "护发", "礼盒", "植萃", "情人节"],
+                highlight: "PHILIP B情人节限定礼盒含轻盈蓬松洗发水（融合迷迭香、绿茶、芦荟微米萃取）、护发素、免洗精华液及手工宽齿梳。以春日花园为灵感，香调融合木兰、橙花、栀子、玫瑰与苦橙，呈现中性精致的奢华护理体验。",
+                url: "https://fashion.sina.com.cn/b/2026-02-02/1638/doc-inhkmmxz4130859.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "B",
+                relevance: 82,
+                title: "想要一个"新年"味满满的美甲，快来这里抄作业！",
+                keywords: ["美甲", "可拆卸", "新年", "磁吸", "猫眼"],
+                highlight: "2026新年美甲流行红色波点、斑马纹、星星图案、猫眼磁石设计。创新可拆卸美甲采用磁吸、铰链或榫卯结构，让佩戴者在长款华丽美甲和短款实用美甲间自由切换，完美解决美观与实用矛盾。",
+                url: "https://fashion.sina.com.cn/s/2026-02-02/1731/doc-inhkmmxz4164581.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "C",
+                relevance: 75,
+                title: "一顿p图操作，让那些"压箱底"的照片都能重见天日了",
+                keywords: ["修图", "AI", "照片", "调色", "春节"],
+                highlight: "针对春节修图需求，介绍系统化修图方法：先压高光再提阴影最后调肤色。通过分区调整、HSL调整、曲线工具等功能，解决过曝、欠曝、模糊、肤色不佳等问题，让废片重见天日。强调细节决定成败。",
+                url: "https://fashion.sina.com.cn/s/2026-02-12/1652/doc-inhmpyyi3945076.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "B",
+                relevance: 72,
+                title: "一件这个类型的时尚单品，可以抵得上十件？",
+                keywords: ["皮衣", "多功能", "投资单品", "跨季节", "时装周"],
+                highlight: "皮衣在2026年成为跨越季节与场合的投资单品。可搭配绸缎衬衫展现女性气质，配轻薄纱裙打造春季造型，搭学院风半裙呈现青春感。从硬朗到女性化、从复古到现代，一衣多穿符合可持续时尚趋势。",
+                url: "https://fashion.sina.com.cn/s/2026-02-12/1658/doc-inhmpyyi3947817.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "B",
+                relevance: 68,
+                title: "薄底运动鞋不再称霸天下，乐福鞋再次翻红？",
+                keywords: ["乐福鞋", "松弛感", "一脚蹬", "Saint Laurent", "实用"],
+                highlight: "Lyst 2025年Q3数据显示Saint Laurent和The Row乐福鞋分列第2、4名。作为一脚蹬，兼具穿脱方便、轻便舒适特点，传达松弛感美学。既中性又优雅，平衡正式与休闲，冬季薄底为厚重棉服注入轻盈气息。",
+                url: "https://fashion.sina.com.cn/s/2026-02-02/1720/doc-inhkmmye7994667.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "B",
+                relevance: 65,
+                title: "深冬来临，你挑好衣橱里那件最柔软的毛衣了吗？",
+                keywords: ["毛衣", "柔软", "羊绒", "舒适", "廓形"],
+                highlight: "强调毛衣柔软性与舒适度，介绍贴身款（弹力面料紧贴身形）和宽松款（宽肩、茧型、披挂式）两种廓形。推荐羊绒、马海毛、丝绒等顶级材质，满足都市女性对不费力时髦感和拒绝束缚的需求。",
+                url: "https://fashion.sina.com.cn/s/2026-02-12/1706/doc-inhmpyyc9725000.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "B",
+                relevance: 62,
+                title: "除了黑白灰，还能给冬天什么颜色"看看"？",
+                keywords: ["配色", "冬季穿搭", "浆果色", "橄榄绿", "情绪"],
+                highlight: "鼓励打破冬季黑白灰单调，推荐棕色系、橄榄绿、浆果色调等柔和色调，奶油色、米色等温柔色系，高饱和亮红色适合春节。同色系叠穿和小面积配色点缀成主流，色彩选择既是时尚表达也是心理调节手段。",
+                url: "https://fashion.sina.com.cn/s/2026-02-12/1655/doc-inhmpyyf6844313.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "B",
+                relevance: 58,
+                title: "这一波时尚潮流，怎么又"老"又"新"的？",
+                keywords: ["复古", "New Vintage", "90年代", "老钱风", "二手"],
+                highlight: "New Vintage 3.0潮流指全新但做旧的时尚，或用新方式混搭旧单品。融合90年代美学、Blokecore、老钱风等元素，Z世代通过二手商店或父母衣橱淘旧物，追求独一无二且具收藏价值的物品。",
+                url: "https://fashion.sina.com.cn/s/2026-02-02/1724/doc-inhkmmyc0896476.shtml"
+            },
+            {
+                date: "2026-02-16",
+                category: "C",
+                relevance: 45,
+                title: "年末的舞台上，哪位女solo又贡献出名场面了？",
+                keywords: ["舞台妆", "Jennie", "单依纯", "演唱会", "造型"],
+                highlight: "年末舞台Jennie凭借顶级表现力和精心编排展现Kpop女王回归，妮式穿搭极具辨识度。单依纯三场跨年全开麦，空灵嗓音配合白裙、流苏、镂空套装。舞台妆造围绕氛围和情绪服务，不再追求精致上镜。",
+                url: "https://fashion.sina.com.cn/s/2026-02-02/1738/doc-inhkmmye8008211.shtml"
+            }
+        ];
+
+        let filteredData = [...newsData];
+        let currentSort = { column: 'date', direction: 'desc' };
+
+        // 渲染表格
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            const noResults = document.getElementById('noResults');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            tbody.innerHTML = data.map(item => `
+                <tr>
+                    <td>${item.date}</td>
+                    <td><span class="category-badge ${item.category}">${item.category}类</span></td>
+                    <td class="relevance-cell">${item.relevance}分</td>
+                    <td><strong>${item.title}</strong></td>
+                    <td>
+                        ${item.keywords.map(kw => `<span class="keyword-tag">${kw}</span>`).join('')}
+                    </td>
+                    <td><div class="highlight-text">${item.highlight}</div></td>
+                    <td><a href="${item.url}" target="_blank" class="link-btn">查看原文</a></td>
+                </tr>
+            `).join('');
+        }
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            filteredData = newsData.filter(item => {
+                return item.title.toLowerCase().includes(query) ||
+                       item.keywords.some(kw => kw.toLowerCase().includes(query)) ||
+                       item.highlight.toLowerCase().includes(query);
+            });
+            applyFilters();
+        });
+
+        // 分类筛选
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                applyFilters();
+            });
+        });
+
+        function applyFilters() {
+            const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
+            let data = [...filteredData];
+
+            if (activeCategory !== 'all') {
+                data = data.filter(item => item.category === activeCategory);
+            }
+
+            sortData(data);
+            renderTable(data);
+        }
+
+        // 排序功能
+        document.querySelectorAll('th.sortable').forEach(th => {
+            th.addEventListener('click', function() {
+                const column = this.dataset.sort;
+
+                if (currentSort.column === column) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.column = column;
+                    currentSort.direction = 'desc';
+                }
+
+                document.querySelectorAll('th.sortable').forEach(t => {
+                    t.classList.remove('sort-asc', 'sort-desc');
+                });
+                this.classList.add(`sort-${currentSort.direction}`);
+
+                applyFilters();
+            });
+        });
+
+        function sortData(data) {
+            data.sort((a, b) => {
+                let aVal = a[currentSort.column];
+                let bVal = b[currentSort.column];
+
+                if (currentSort.column === 'relevance') {
+                    aVal = parseInt(aVal);
+                    bVal = parseInt(bVal);
+                }
+
+                if (currentSort.direction === 'asc') {
+                    return aVal > bVal ? 1 : -1;
+                } else {
+                    return aVal < bVal ? 1 : -1;
+                }
+            });
+        }
+
+        // 初始化
+        sortData(filteredData);
+        renderTable(filteredData);
+    </script>
+</body>
+</html>

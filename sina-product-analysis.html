@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新浪女性热搜 - 美妆个护产品分析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        .quick-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .quick-link {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .quick-link:hover {
+            background: #5568d3;
+        }
+        .search-section {
+            margin-bottom: 30px;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-top: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 100;
+        }
+        .search-results.active {
+            display: block;
+        }
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-result-item:hover {
+            background: #f8f9fa;
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .search-result-meta {
+            font-size: 12px;
+            color: #666;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 0 2px;
+        }
+        .date-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .date-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: white;
+        }
+        .date-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .date-card.no-update {
+            background: #f8f9fa;
+            border-color: #dee2e6;
+        }
+        .date-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .date-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .date-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .date-link:hover {
+            text-decoration: underline;
+        }
+        .date-content {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+        .chart-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+        .chart-svg {
+            transform: rotate(-90deg);
+        }
+        .chart-legend {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .chart-legend-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+        }
+        .chart-legend-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .stat-item {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .top-news {
+            margin-top: 16px;
+            padding: 16px;
+            background: #fff3cd;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        .top-news-label {
+            font-size: 12px;
+            color: #856404;
+            margin-bottom: 4px;
+        }
+        .top-news-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+        .top-news-score {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffc107;
+            margin-left: 8px;
+        }
+        .no-update-text {
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+            padding: 40px;
+        }
+        .category-legend {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 14px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        .legend-color.A { background: #ff69b4; }
+        .legend-color.B { background: #ff8c42; }
+        .legend-color.C { background: #6c757d; }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 24px; }
+            .date-content {
+                grid-template-columns: 1fr;
+            }
+            .chart-container {
+                margin: 0 auto;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>新浪女性热搜 - 美妆个护产品分析</h1>
+            <div class="subtitle">市场洞察数据库</div>
+        </div>
+
+        <div class="quick-links">
+            <a href="sina-product-analysis-database.html" class="quick-link">📊 查看完整数据库</a>
+        </div>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索新闻标题、关键词...">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+
+        <div class="date-list">
+            <!-- 2026-02-16 -->
+            <div class="date-card">
+                <div class="date-header">
+                    <div class="date-title">2026年2月16日</div>
+                    <a href="2026-02-16.html" class="date-link">查看详情 →</a>
+                </div>
+                <div class="date-content">
+                    <div class="chart-container">
+                        <svg class="chart-svg" width="200" height="200" viewBox="0 0 200 200">
+                            <!-- A类: 2/10 = 20% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#f0f0f0" stroke-width="40"/>
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#ff69b4" stroke-width="40"
+                                    stroke-dasharray="100.53 402.12" stroke-dashoffset="0"/>
+                            <!-- B类: 6/10 = 60% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#ff8c42" stroke-width="40"
+                                    stroke-dasharray="301.59 402.12" stroke-dashoffset="-100.53"/>
+                            <!-- C类: 2/10 = 20% -->
+                            <circle cx="100" cy="100" r="80" fill="none" stroke="#6c757d" stroke-width="40"
+                                    stroke-dasharray="100.53 402.12" stroke-dashoffset="-402.12"/>
+                        </svg>
+                        <div class="chart-legend">
+                            <div class="chart-legend-value">10</div>
+                            <div class="chart-legend-label">条新闻</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-label">A类（核心）</div>
+                                <div class="stat-value" style="color: #ff69b4;">2条</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">B类（延伸）</div>
+                                <div class="stat-value" style="color: #ff8c42;">6条</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">C类（周边）</div>
+                                <div class="stat-value" style="color: #6c757d;">2条</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">平均相关度</div>
+                                <div class="stat-value">71.5分</div>
+                            </div>
+                        </div>
+                        <div class="top-news">
+                            <div class="top-news-label">🏆 最高相关度</div>
+                            <div class="top-news-title">
+                                IPSA茵芙莎「清润蓝矿物皂」全新升级上市
+                                <span class="top-news-score">95分</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="category-legend">
+                    <div class="legend-item">
+                        <div class="legend-color A"></div>
+                        <span>A类：美妆个护核心</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color B"></div>
+                        <span>B类：时尚延伸</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color C"></div>
+                        <span>C类：周边配件</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 搜索数据
+        const newsData = [
+            {
+                date: "2026-02-16",
+                title: "IPSA茵芙莎「清润蓝矿物皂」全新升级上市",
+                category: "A",
+                relevance: 95,
+                keywords: ["茵芙莎", "洁面", "矿物皂", "控油", "保湿"]
+            },
+            {
+                date: "2026-02-16",
+                title: "PHILIP B.呈献情人节限定礼盒",
+                category: "A",
+                relevance: 88,
+                keywords: ["PHILIP B", "护发", "礼盒", "植萃", "情人节"]
+            },
+            {
+                date: "2026-02-16",
+                title: "想要一个"新年"味满满的美甲，快来这里抄作业！",
+                category: "B",
+                relevance: 82,
+                keywords: ["美甲", "可拆卸", "新年", "磁吸", "猫眼"]
+            },
+            {
+                date: "2026-02-16",
+                title: "一顿p图操作，让那些"压箱底"的照片都能重见天日了",
+                category: "C",
+                relevance: 75,
+                keywords: ["修图", "AI", "照片", "调色", "春节"]
+            },
+            {
+                date: "2026-02-16",
+                title: "一件这个类型的时尚单品，可以抵得上十件？",
+                category: "B",
+                relevance: 72,
+                keywords: ["皮衣", "多功能", "投资单品", "跨季节", "时装周"]
+            },
+            {
+                date: "2026-02-16",
+                title: "薄底运动鞋不再称霸天下，乐福鞋再次翻红？",
+                category: "B",
+                relevance: 68,
+                keywords: ["乐福鞋", "松弛感", "一脚蹬", "Saint Laurent", "实用"]
+            },
+            {
+                date: "2026-02-16",
+                title: "深冬来临，你挑好衣橱里那件最柔软的毛衣了吗？",
+                category: "B",
+                relevance: 65,
+                keywords: ["毛衣", "柔软", "羊绒", "舒适", "廓形"]
+            },
+            {
+                date: "2026-02-16",
+                title: "除了黑白灰，还能给冬天什么颜色"看看"？",
+                category: "B",
+                relevance: 62,
+                keywords: ["配色", "冬季穿搭", "浆果色", "橄榄绿", "情绪"]
+            },
+            {
+                date: "2026-02-16",
+                title: "这一波时尚潮流，怎么又"老"又"新"的？",
+                category: "B",
+                relevance: 58,
+                keywords: ["复古", "New Vintage", "90年代", "老钱风", "二手"]
+            },
+            {
+                date: "2026-02-16",
+                title: "年末的舞台上，哪位女solo又贡献出名场面了？",
+                category: "C",
+                relevance: 45,
+                keywords: ["舞台妆", "Jennie", "单依纯", "演唱会", "造型"]
+            }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        // 搜索功能
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query.length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const results = newsData.filter(item => {
+                return item.title.toLowerCase().includes(query) ||
+                       item.keywords.some(kw => kw.toLowerCase().includes(query));
+            });
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="search-result-item">没有找到匹配的结果</div>';
+                searchResults.classList.add('active');
+                return;
+            }
+
+            searchResults.innerHTML = results.map(item => {
+                const highlightedTitle = item.title.replace(
+                    new RegExp(query, 'gi'),
+                    match => `<span class="highlight">${match}</span>`
+                );
+
+                return `
+                    <div class="search-result-item" onclick="window.location.href='2026-02-16.html'">
+                        <div class="search-result-title">${highlightedTitle}</div>
+                        <div class="search-result-meta">
+                            ${item.date} | ${item.category}类 | 相关度: ${item.relevance}分
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            searchResults.classList.add('active');
+        });
+
+        // 点击外部关闭搜索结果
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-box')) {
+                searchResults.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
